@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormEditMapper 
    Caption         =   "Edit Line Item"
-   ClientHeight    =   6435
-   ClientLeft      =   240
-   ClientTop       =   930
-   ClientWidth     =   9525
+   ClientHeight    =   6510
+   ClientLeft      =   420
+   ClientTop       =   1650
+   ClientWidth     =   9600
    OleObjectBlob   =   "UserFormEditMapper.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -19,6 +19,7 @@ Option Explicit
 Public EnableEvents As Boolean
 Private theWorkAnchor As Range
 Private newItemSelected As Boolean
+Private newMliItemSelected As Boolean
 
 
 Private Sub ComboBoxDeloitteItems_Click()
@@ -31,7 +32,7 @@ Private Sub ComboBoxDeloitteItems_Click()
         theItemId = .Value
         'is theItemId in ListBoxMapper? Add and Show it
         With Me.ListBoxMapper
-            Dim rng As Range, anchor As Range, lastCell As Range
+            Dim rng As Range, anchor As Range, lastCell As Range, foundCell As Range
             Set anchor = Range("tblWorksheet[[#Headers],[DeloitteFieldId]]")
             Set lastCell = anchor.End(xlDown)
             If anchor.Cells(2, 1) Is Nothing Or anchor.Cells(2, 1) = "" Then
@@ -39,16 +40,25 @@ Private Sub ComboBoxDeloitteItems_Click()
             End If
             Set rng = Range(anchor, lastCell)
             On Error Resume Next
-            Set anchor = rng.Find(theItemId)
-            If anchor Is Nothing Then
-                'insert a row below at lastCell
-                lastCell.ListObject.ListRows.Add AlwaysInsert:=True
-                Set theWorkAnchor = lastCell.Offset(1, 0)
+            Set foundCell = rng.Find(theItemId)
+            If foundCell Is Nothing Then
+                'insert a new row below at lastCell
+                'lastCell.ListObject.ListRows.Add
+                Set theWorkAnchor = lastCell.offset(1, 0)
             Else
+                'locate the last row of the same deloitte item
+                Dim theOffset As Integer
+                theOffset = 1
+                While foundCell.offset(theOffset, 0) = theItemId
+                    theOffset = theOffset + 1
+                Wend
+                
                 'insert a row below at anchor
-                anchor.ListObject.ListRows.Add AlwaysInsert:=True
-                Set theWorkAnchor = anchor.Offset(1, 0)
+                'anchor.ListObject.ListRows.Add
+                Set theWorkAnchor = foundCell.offset(theOffset, 0)
             End If
+            'theWorkAnchor.ListObject.ListRows.Add Position:=theWorkAnchor.Row - anchor.Row, AlwaysInsert:=True
+            'Set theWorkAnchor = theWorkAnchor.offset(-1, 0)
             
         End With
         newItemSelected = True
@@ -61,7 +71,7 @@ Private Sub ComboBoxMliItems_Click()
     If Me.EnableEvents = False Then Exit Sub
     'find if the Deloitte item has been mapped. If yes, alert and exit.
     'otherwise, start adding Mli items with mapping multipliers
-    newItemSelected = True
+    newMliItemSelected = True
 End Sub
 
 Private Sub btnAdd_Click()
@@ -77,10 +87,12 @@ Private Sub btnAdd_Click()
     'stop button click event
     'Me.EnableEvents = False
     Application.EnableEvents = False
-    Me.ListBoxMapper.Selected(theWorkAnchor.Row - anchor.Row) = True
+    'Me.ListBoxMapper.Selected(theWorkAnchor.Row - anchor.Row) = True
     
     Dim mliId As Integer, mliName As String, delId As Integer, delName As String
-    
+    ' add a row and set data
+    theWorkAnchor.ListObject.ListRows.Add Position:=theWorkAnchor.Row - anchor.Row, AlwaysInsert:=True
+    Set theWorkAnchor = theWorkAnchor.offset(-1, 0)
     With Me.ComboBoxDeloitteItems
         theWorkAnchor.Cells(1, 1) = .Value
         theWorkAnchor.Cells(1, 2) = .Column(2)
@@ -91,11 +103,15 @@ Private Sub btnAdd_Click()
     End With
     theWorkAnchor.Cells(1, 5) = Me.txtMultiplier.Value
     'Me.ListBoxMapper.RowSource = Range(theWorkAnchor.Cells(1, 1), theWorkAnchor.Cells(10, 7)).Address
-    Me.ListBoxMapper.Selected(theWorkAnchor.Row - anchor.Row - 1) = True
+    'Me.ListBoxMapper.Selected(theWorkAnchor.Row - anchor.Row) = True
+    ' refresh now that new rows are added
+    Me.ListBoxMapper.RowSource = "tblWorksheet"
 
     'Me.Show
     newItemSelected = False
-
+    'Set theWorkAnchor = Range("tblWorksheet[[#Headers],[DeloitteFieldId]]")
+    'Me.ComboBoxDeloitteItems.Value = ""
+    
     Application.EnableEvents = True
 End Sub
 
@@ -214,6 +230,7 @@ Private Sub UserForm_Initialize()
     Me.EnableEvents = True
     Application.EnableEvents = True
     newItemSelected = False
+    newMliItemSelected = False
     Set theWorkAnchor = Range("tblWorksheet[[#Headers],[DeloitteFieldId]]")
     With Me.ComboBoxDeloitteItems
         .Value = ""
