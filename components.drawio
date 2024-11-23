@@ -370,7 +370,7 @@
           <mxGeometry y="152" width="180" height="26" as="geometry" />
         </mxCell>
         <mxCell id="atBK9uibQjHY9YmGZzAZ-9" value="Singleton obj:&amp;nbsp;&lt;div&gt;CurveMgr&lt;/div&gt;" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" vertex="1" parent="1">
-          <mxGeometry x="-580" y="30" width="190" height="230" as="geometry" />
+          <mxGeometry x="-220" y="30" width="190" height="230" as="geometry" />
         </mxCell>
         <mxCell id="atBK9uibQjHY9YmGZzAZ-10" value="vector&amp;lt;Curve&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-9">
           <mxGeometry y="40" width="190" height="26" as="geometry" />
@@ -389,6 +389,33 @@
         </mxCell>
         <mxCell id="atBK9uibQjHY9YmGZzAZ-16" value="+ method(type): type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-9">
           <mxGeometry y="180" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-17" value="Singleton obj:&amp;nbsp;&lt;div&gt;MktStateMgr&lt;/div&gt;" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=none;fontFamily=Verdana;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="-560" y="30" width="190" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-18" value="vector&amp;lt;Scenario&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-17">
+          <mxGeometry y="40" width="190" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-19" value="+ field: type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-17">
+          <mxGeometry y="66" width="190" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-20" value="+ field: type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-17">
+          <mxGeometry y="92" width="190" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-21" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-17">
+          <mxGeometry y="118" width="190" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-22" value="GetScenario(name, date): Scenario" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-17">
+          <mxGeometry y="126" width="190" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-23" value="+ method(type): type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="atBK9uibQjHY9YmGZzAZ-17">
+          <mxGeometry y="180" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-24" value="Valuator:&lt;div&gt;1. iterate through securities&lt;/div&gt;&lt;div&gt;2. iterate through scenarios&lt;/div&gt;&lt;div&gt;3. call PNV() to calculate risk measures&lt;/div&gt;&lt;div&gt;4. store results&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-690" y="310" width="510" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="atBK9uibQjHY9YmGZzAZ-25" value="ScenarioBiulder&lt;div&gt;1. iterate though curves in CurveMgr&lt;/div&gt;&lt;div&gt;2. perturb them and store into MktStateMgr&lt;/div&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-360" y="84" width="140" height="116" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
